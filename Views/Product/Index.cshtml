@@ -1,0 +1,27 @@
+﻿@model List<Product>
+
+    <h1>Data Reselt</h1>
+
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>ImageUrl</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Address</td>
+            <td>
+               <img src="/Image/@item.ImageUrl" style="width:80px" />
+            </td>
+        </tr>
+    }
+</table>
+
+
