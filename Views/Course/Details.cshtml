@@ -1,0 +1,40 @@
+@model Course
+
+@{
+    ViewData["Title"] = "Course Details";
+    Layout = "_Layout";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-info text-white">
+                <h4 class="mb-0">Course Details</h4>
+            </div>
+            <div class="card-body">
+                <dl class="row mb-0">
+                    <dt class="col-sm-4">Course Id:</dt>
+                    <dd class="col-sm-8">@Model.Id</dd>
+
+                    <dt class="col-sm-4">Course Name:</dt>
+                    <dd class="col-sm-8">@Model.Name</dd>
+
+                    <dt class="col-sm-4">Total Degree:</dt>
+                    <dd class="col-sm-8">@Model.Degree</dd>
+
+                    <dt class="col-sm-4">Minimum Degree:</dt>
+                    <dd class="col-sm-8">@Model.MinDegree</dd>
+
+                    <dt class="col-sm-4">Hours:</dt>
+                    <dd class="col-sm-8">@Model.Hours</dd>
+
+                    <dt class="col-sm-4">Department:</dt>
+                    <dd class="col-sm-8">@(Model.Department?.Name ?? "No Department")</dd>
+                </dl>
+            </div>
+            <div class="card-footer d-flex gap-2">
+                <a asp-controller="Course" asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>

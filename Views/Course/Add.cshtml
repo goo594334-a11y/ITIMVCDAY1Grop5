@@ -1,0 +1,51 @@
+@model Course
+
+@{
+    ViewData["Title"] = "Add Course";
+    Layout = "_Layout";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Add New Course</h4>
+            </div>
+            <div class="card-body">
+                <form asp-controller="Course" asp-action="Add" method="post">
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label">Course Name</label>
+                        <input asp-for="Name" class="form-control" placeholder="Enter course name" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Degree" class="form-label">Total Degree</label>
+                        <input asp-for="Degree" type="number" step="0.01" class="form-control" placeholder="Enter total degree" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="MinDegree" class="form-label">Minimum Degree</label>
+                        <input asp-for="MinDegree" type="number" step="0.01" class="form-control" placeholder="Enter minimum passing degree" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Hours" class="form-label">Hours</label>
+                        <input asp-for="Hours" type="number" class="form-control" placeholder="Enter course hours" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="DepartmentId" class="form-label">Department</label>
+                        <select asp-for="DepartmentId" asp-items="ViewBag.Departments" class="form-select">
+                            <option value="">-- Select Department --</option>
+                        </select>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-success">Save Course</button>
+                        <a asp-controller="Course" asp-action="Index" class="btn btn-secondary">Back to List</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
