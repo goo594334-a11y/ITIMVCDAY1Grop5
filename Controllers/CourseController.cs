@@ -1,5 +1,6 @@
 using ITIMVCDAY1Grop5.Data.Context;
 using ITIMVCDAY1Grop5.Models.Entity;
+using ITIMVCDAY1Grop5.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -38,16 +39,27 @@ namespace ITIMVCDAY1Grop5.Controllers
 
         // 2. Add (POST)
         [HttpPost]
-        public IActionResult Add(Course course)
+        public IActionResult Add(CourseViewModel courseVm)
         {
-            if (course.DepartmentId == 0)
+            if (ModelState.IsValid)
             {
-                course.DepartmentId = null;
+                var course = new Course
+                {
+                    Name = courseVm.Name,
+                    Degree = courseVm.Degree,
+                    MinDegree = courseVm.MinDegree,
+                    Hours = courseVm.Hours,
+                    DepartmentId = (courseVm.DepartmentId == 0) ? null : courseVm.DepartmentId
+                };
+
+                Context.Courses.Add(course);
+                Context.SaveChanges();
+                return RedirectToAction(nameof(Index));
             }
 
-            Context.Courses.Add(course);
-            Context.SaveChanges();
-            return RedirectToAction(nameof(Index));
+            var departments = Context.Departments.ToList();
+            ViewBag.Departments = new SelectList(departments, "Id", "Name");
+            return View(courseVm);
         }
     }
 }
